@@ -24,7 +24,7 @@ class PlayerViewModel : ViewModel() {
         return repository.getPlayers()
     }
 
-    fun getPlayerDetails(name: String?): Player? {
-        return repository.getPlayerDetails(name)
+    fun getPlayerDetails(): Player? {
+        return repository.getPlayerDetails(selectedPlayer.value?:"Lebron James")
     }
 }

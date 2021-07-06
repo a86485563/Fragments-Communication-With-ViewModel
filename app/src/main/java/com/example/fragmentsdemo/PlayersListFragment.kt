@@ -31,9 +31,9 @@ class PlayersListFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(PlayerViewModel::class.java)
         var adapter  = this.context?.let { ArrayAdapter<String>(it,android.R.layout.simple_list_item_1, viewModel.getPlayerList()) };
         lv.adapter=adapter
@@ -42,7 +42,9 @@ class PlayersListFragment : Fragment() {
             AdapterView.OnItemClickListener { adapter: AdapterView<*>?, itemView: View, pos: Int, id: Long ->
                 val tv = itemView as TextView
                 Toast.makeText(this.context, tv.text.toString(), Toast.LENGTH_SHORT).show()
-                viewModel.selectPlayer(tv.text.toString())
+                if(viewModel.selectedPlayer.value != tv.text.toString()){
+                    viewModel.selectPlayer(tv.text.toString())
+                }
             }
     }
 

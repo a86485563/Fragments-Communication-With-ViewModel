@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.listview_livedata.model.Player
 import com.example.listview_livedata.viewmodel.PlayerViewModel
@@ -33,10 +34,6 @@ class PlayerDetailsFragment : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.player_details, container, false)
 
-        val viewModel = ViewModelProvider(requireActivity()).get(PlayerViewModel::class.java)
-        viewModel.selectedPlayer.observe(viewLifecycleOwner,
-            { item: String? -> displayDetails(viewModel.getPlayerDetails(item)!!) })
-
         name = view.findViewById(R.id.name);
         age = view.findViewById(R.id.age);
         team = view.findViewById(R.id.team);
@@ -51,5 +48,13 @@ class PlayerDetailsFragment : Fragment() {
         rank.text = "" + player.rank
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
+        val viewModel = ViewModelProvider(requireActivity()).get(PlayerViewModel::class.java)
+        viewModel.selectedPlayer.observe(viewLifecycleOwner,
+            Observer<String>{
+                viewModel.getPlayerDetails()?.let { it -> displayDetails(it) };
+            })
+    }
 }
