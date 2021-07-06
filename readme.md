@@ -9,7 +9,7 @@
   - [How to use Fragment?](#how-to-use-fragment)
     - [step 1 畫 Layout](#step-1-畫-layout)
     - [step 2 完成 layout 對應的邏輯。](#step-2-完成-layout-對應的邏輯)
-    - [3. 綁上宿主(host)](#3-綁上宿主host)
+    - [step 3 綁上宿主(host)](#step-3-綁上宿主(host))
   - [ViewModel](#viewmodel)
 - [ref](#ref)
 
@@ -29,7 +29,9 @@ Hi ya ~ 總不能所有的東西所有的東西都在 Activity 一路洋洋灑�
 此篇想要展示使用兩個`Fragment`將我們可愛的 Activity 對切，分成兩個區塊，上半部顯示球員清單，下半部顯示該點擊的球員資料喔，對了湖人一輪游，害我輸兩千，歐郎賣造~
 
 先附上成品的圖片。
-![demoImage]()
+
+<img src="https://github.com/a86485563/Fragments-Communication-With-ViewModel/blob/master/Screenshot_1625233915.png" alt="demoImage" width="200"/>
+
 
 ## 了解重點
 
@@ -87,7 +89,7 @@ Hi ya ~ 總不能所有的東西所有的東西都在 Activity 一路洋洋灑�
 
 `view model相關設定在onActivityCreated後做` 有原因，因為 onActivityCreated 是對應 Activity 完成`created()階段`後才執行，因此在`onActivityCreated`後便做保證了我的 Activity 執行了，才能夠透過他幫我傳遞`viewmodel`。
 
-### 3. 綁上宿主(host)
+### step 3 綁上宿主(host)
 
 回到 MainActivity 上透過 fragmentManager 綁上~
 
@@ -119,7 +121,9 @@ view model 裏頭有個`livedata`，他就是我們的主角，`也就是要改�
 
 `PlayersListFragment` 的 list 被 click -> 改變 viewmodel 的`selectedPlayer` -> `PlayerDetailsFragment`監聽到改變了->取 playerDetail -> 改變 UI。
 
-![flowImage]()
+<img src="https://github.com/a86485563/Fragments-Communication-With-ViewModel/blob/master/viewmodel.png" alt="flowImage" width="600"/>
+
+
 
 ```kotlin
 class PlayerViewModel : ViewModel() {
@@ -185,7 +189,8 @@ class PlayerViewModel : ViewModel() {
 小弟我心中有個疑問，為什麼 view model 可以隨意地穿梭在 fragment 間
 ，堪稱是安卓界的康斯坦丁，感覺`本體不存在於遊走的對象間`，於是小弟圖法煉鋼的去檢查記憶體位置，如下圖，得知了，`原來他就是一塊記憶體位置，並且他不會受到要傳遞的fragment、Activity影響`。
 
-![memoryImage]()
+<img src="https://github.com/a86485563/Fragments-Communication-With-ViewModel/blob/master/memory.png" alt="memoryImage" width="600"/>
+
 
 # ref
 
