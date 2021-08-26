@@ -9,24 +9,23 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_playerList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/fragment_container_playerDetail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
         </androidx.fragment.app.FragmentContainerView>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_playerDetail"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_container_playerList">
+            app:layout_constraintStart_toEndOf="@+id/fragment_container_playerList"
+            app:layout_constraintTop_toTopOf="parent">
 
         </androidx.fragment.app.FragmentContainerView>
 
